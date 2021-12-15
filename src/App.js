@@ -3,20 +3,23 @@ import logo from './logo.svg';
 import './App.css';
 
 function App() {
-  let [count, setCount] = useState({ num: 0, fred: "barney", myarr: [11, 22, 33] });
+  let [count, setCount] = useState(); // start off empty
 
   return (
     <div className='App'>
       <header className='App-header'>
-        {JSON.stringify(count)}
+        {count ? count() : 'no value'}{' '}
+        {/* if we have a value, call it as a function */}
         <button
           onClick={() => {
             setCount((curr) => {
-              let newObj = {...curr}
-              newObj.num += 1;
-              return newObj;
+              return () => {
+                // returning a function!!!
+                let msg = "i'm a function!";
+                console.log(msg);
+                return msg;
+              };
             });
-            console.log(`CLICKED! ${count.num}`);
           }}
         >
           click me
