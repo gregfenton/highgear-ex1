@@ -3,19 +3,20 @@ import logo from './logo.svg';
 import './App.css';
 
 function App() {
-  let [count, setCount] = useState(0);
+  let [count, setCount] = useState({ num: 0, fred: "barney", myarr: [11, 22, 33] });
 
   return (
     <div className='App'>
       <header className='App-header'>
-        {count}
+        {JSON.stringify(count)}
         <button
           onClick={() => {
-            setTimeout(() => {
-              console.log(`setCount()!! ${Date()}`);
-              setCount((x) => x + 1);
-            }, 3000);
-            console.log(`CLICKED! ${count}`);
+            setCount((curr) => {
+              let newObj = {...curr}
+              newObj.num += 1;
+              return newObj;
+            });
+            console.log(`CLICKED! ${count.num}`);
           }}
         >
           click me
